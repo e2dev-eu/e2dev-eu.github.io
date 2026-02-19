@@ -26,4 +26,5 @@ Modern browser dashboard for ESP32-P4 firmware flashing with built-in Serial Mon
 
 - Web Serial works only on Chromium-based browsers and requires `https` or `http://localhost`.
 - The default flash offset is `0x0` for merged images.
+- Local `.bin` flashing is used only when you choose `Use local BIN from Browse...` in the BIN dropdown.
 - Keep flasher and monitor disconnected from each other (single serial port access).

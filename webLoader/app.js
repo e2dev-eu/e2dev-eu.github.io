@@ -54,6 +54,21 @@ function setMonitorConnected(connected) {
   monitorStatus.classList.toggle("active", connected);
 }
 
+function updateBinInputsState() {
+  const localSelected = binSelect.value === "__local__";
+  binFile.disabled = !localSelected;
+
+  if (!loader) {
+    return;
+  }
+
+  if (localSelected) {
+    flashBtn.disabled = !(binFile.files && binFile.files.length > 0);
+  } else {
+    flashBtn.disabled = false;
+  }
+}
+
 const terminal = {
   clean() {
     logEl.value = "";
@@ -79,13 +94,17 @@ function toBinaryString(bytes) {
 }
 
 async function getSelectedBin() {
-  if (binFile.files && binFile.files.length > 0) {
-    return { file: binFile.files[0], isPrepared: false };
-  }
-
   const selected = binSelect.value;
   if (!selected) {
     throw new Error("No BIN selected.");
+  }
+
+  if (selected === "__local__") {
+    if (!(binFile.files && binFile.files.length > 0)) {
+      throw new Error("Choose a local BIN file first.");
+    }
+
+    return { file: binFile.files[0], isPrepared: false };
   }
 
   const response = await fetch(`./${selected}`);
@@ -121,6 +140,7 @@ async function connect() {
   flashBtn.disabled = false;
   disconnectBtn.disabled = false;
   setFlashConnected(true);
+  updateBinInputsState();
 }
 
 async function flash() {
@@ -129,6 +149,7 @@ async function flash() {
   }
 
   const { file, isPrepared } = await getSelectedBin();
+  logLine(`Selected BIN: ${file.name}`);
   const arrayBuffer = await file.arrayBuffer();
   const data = toBinaryString(new Uint8Array(arrayBuffer));
 
@@ -170,6 +191,7 @@ async function disconnect() {
   flashBtn.disabled = true;
   disconnectBtn.disabled = true;
   setFlashConnected(false);
+  updateBinInputsState();
 }
 
 async function startMonitor() {
@@ -342,8 +364,17 @@ if (!binSelect.options.length) {
   flashBtn.disabled = true;
 }
 
+binSelect.addEventListener("change", () => {
+  updateBinInputsState();
+});
+
+binFile.addEventListener("change", () => {
+  updateBinInputsState();
+});
+
 monitorSendBtn.disabled = true;
 monitorInput.disabled = true;
 setFlashConnected(false);
 setMonitorConnected(false);
+updateBinInputsState();
 
