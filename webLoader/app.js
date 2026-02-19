@@ -9,6 +9,8 @@ const flashBtn = document.getElementById("flashBtn");
 const disconnectBtn = document.getElementById("disconnectBtn");
 const logEl = document.getElementById("log");
 
+const PREPARED_BIN_OFFSET = 0x0;
+
 let transport = null;
 let loader = null;
 
@@ -43,7 +45,7 @@ function toBinaryString(bytes) {
 
 async function getSelectedBin() {
   if (binFile.files && binFile.files.length > 0) {
-    return binFile.files[0];
+    return { file: binFile.files[0], isPrepared: false };
   }
 
   const selected = binSelect.value;
@@ -57,7 +59,10 @@ async function getSelectedBin() {
   }
 
   const buffer = await response.arrayBuffer();
-  return new File([buffer], selected, { type: "application/octet-stream" });
+  return {
+    file: new File([buffer], selected, { type: "application/octet-stream" }),
+    isPrepared: true
+  };
 }
 
 async function connect() {
@@ -80,17 +85,23 @@ async function flash() {
     throw new Error("Not connected.");
   }
 
-  const file = await getSelectedBin();
+  const { file, isPrepared } = await getSelectedBin();
   const arrayBuffer = await file.arrayBuffer();
   const data = toBinaryString(new Uint8Array(arrayBuffer));
 
-  const offsetRaw = flashOffset.value.trim();
-  const offset = offsetRaw.startsWith("0x")
-    ? Number.parseInt(offsetRaw, 16)
-    : Number.parseInt(offsetRaw, 10);
+  let offset;
+  if (isPrepared) {
+    offset = PREPARED_BIN_OFFSET;
+    flashOffset.value = "0x0";
+  } else {
+    const offsetRaw = flashOffset.value.trim();
+    offset = offsetRaw.startsWith("0x")
+      ? Number.parseInt(offsetRaw, 16)
+      : Number.parseInt(offsetRaw, 10);
 
-  if (!Number.isFinite(offset)) {
-    throw new Error("Invalid flash offset.");
+    if (!Number.isFinite(offset)) {
+      throw new Error("Invalid flash offset.");
+    }
   }
 
   await loader.writeFlash({
@@ -99,7 +110,7 @@ async function flash() {
     flashMode: "keep",
     flashFreq: "keep",
     compress: true,
-    eraseAll: false
+    eraseAll: true
   });
 
   await loader.after("hard_reset");
