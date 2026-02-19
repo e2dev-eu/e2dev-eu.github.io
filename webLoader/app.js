@@ -110,7 +110,7 @@ async function flash() {
     flashMode: "keep",
     flashFreq: "keep",
     compress: true,
-    eraseAll: true
+    eraseAll: false
   });
 
   await loader.after("hard_reset");
