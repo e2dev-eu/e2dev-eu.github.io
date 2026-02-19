@@ -1,22 +1,29 @@
 # ESP32-P4 Web Loader
 
-This folder contains a simple Web Serial flasher that runs in Chrome/Edge and can flash
-one of the local `.bin` files in this directory.
+Modern browser dashboard for ESP32-P4 firmware flashing with built-in Serial Monitor.
+
+## Features
+
+- Firmware flashing from bundled `.bin` files or a local `.bin` file.
+- Flash controls for baud and offset.
+- Live serial monitor with selectable baud, auto-scroll, clear, and command send.
+- Visual connection status for both flasher and monitor.
 
 ## Quick start
 
 1. Serve this folder with a local web server:
 
    ```bash
-   cd /home/shristov/ESP32P4-MQTT-Panel/webLoader
+   cd /home/shristov/e2dev-eu.github.io/webLoader
    python3 -m http.server 8000
    ```
 
 2. Open `http://localhost:8000` in Chrome or Edge.
-3. Click **Connect**, select the serial port, then **Flash**.
+3. Use **Firmware Flasher** to flash your board.
+4. Use **Serial Monitor** to inspect logs and send commands.
 
 ## Notes
 
-- Web Serial requires `https` or `http://localhost`.
-- The default flash offset is `0x0` for a single, merged image.
-- If you add new `.bin` files, update the `AVAILABLE_BINS` list in `app.js`.
+- Web Serial works only on Chromium-based browsers and requires `https` or `http://localhost`.
+- The default flash offset is `0x0` for merged images.
+- Keep flasher and monitor disconnected from each other (single serial port access).
