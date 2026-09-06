@@ -449,24 +449,32 @@ body {
     width: 100%;
     max-height: 55vh;
     object-fit: contain;
-    background-color: #fff;
+    background-color: #f0f2f5; /* distinct from the caption panel below, so the divider isn't the only separation */
     display: block;
 }
 
 .project-modal-info {
-    padding: 25px 30px 30px;
+    padding: 18px 30px 25px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #fff;
     overflow-y: auto;
 }
 
+/* Styled like a photo/figure caption, not a headline + body paragraph */
 .project-modal-title {
-    font-size: 1.6em;
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #007bff;
+    margin-bottom: 6px;
 }
 
 .project-modal-desc {
-    font-size: 1.05em;
-    color: #555;
+    font-size: 1em;
+    font-style: italic;
+    line-height: 1.5;
+    color: #666;
     margin-bottom: 0;
 }
 
