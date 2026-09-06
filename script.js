@@ -69,4 +69,53 @@ document.addEventListener('DOMContentLoaded', () => {
     fadeInElements.forEach(element => {
         observer.observe(element);
     });
+
+
+    // Project Modal - click a project card (or one image in a
+    // multi-image card) to see it bigger with the description below
+    const projectModal = document.getElementById('project-modal');
+    if (projectModal) {
+        const modalImg = projectModal.querySelector('.project-modal-img');
+        const modalTitle = projectModal.querySelector('.project-modal-title');
+        const modalDesc = projectModal.querySelector('.project-modal-desc');
+
+        const openProjectModal = (imgEl, infoEl) => {
+            modalImg.src = imgEl.src;
+            modalImg.alt = imgEl.alt;
+            modalTitle.textContent = infoEl.querySelector('h3').textContent;
+            modalDesc.textContent = infoEl.querySelector('p').textContent;
+            projectModal.classList.add('open');
+            projectModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+        };
+
+        const closeProjectModal = () => {
+            projectModal.classList.remove('open');
+            projectModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+        };
+
+        document.querySelectorAll('#projects .project-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const infoEl = item.querySelector('.project-info');
+                const clickedImg = e.target.closest('img');
+                // A gallery card has several images - open the one that was
+                // actually clicked; otherwise fall back to the card's only image.
+                const imgEl = (clickedImg && item.contains(clickedImg)) ? clickedImg : item.querySelector('img');
+                if (imgEl && infoEl) {
+                    openProjectModal(imgEl, infoEl);
+                }
+            });
+        });
+
+        projectModal.querySelectorAll('[data-close]').forEach(el => {
+            el.addEventListener('click', closeProjectModal);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && projectModal.classList.contains('open')) {
+                closeProjectModal();
+            }
+        });
+    }
 });

@@ -120,7 +120,7 @@ body {
     inset: 0;
     z-index: 0;
     overflow: hidden;
-    filter: blur(40px);
+    filter: blur(20px);
     transform: scale(1.2); /* grows past the section's edges so blur has no hard boundary to reveal */
 }
 
@@ -357,6 +357,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -409,8 +410,92 @@ body {
     flex-grow: 1; /* Allow paragraph to take available space */
 }
 
-.project-item .btn {
-    align-self: flex-start; /* Align button to the left */
+/* Project modal - bigger image, description below, opened on click */
+.project-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.project-modal.open {
+    display: flex;
+}
+
+.project-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.project-modal-content {
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.project-modal-img {
+    width: 100%;
+    max-height: 55vh;
+    object-fit: contain;
+    background-color: #fff;
+    display: block;
+}
+
+.project-modal-info {
+    padding: 25px 30px 30px;
+    overflow-y: auto;
+}
+
+.project-modal-title {
+    font-size: 1.6em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.project-modal-desc {
+    font-size: 1.05em;
+    color: #555;
+    margin-bottom: 0;
+}
+
+.project-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 1.4em;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.project-modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+body.modal-open {
+    overflow: hidden;
 }
 
 
@@ -602,5 +687,13 @@ footer {
 
      .project-item .project-info {
         padding: 15px;
+    }
+
+    .project-modal {
+        padding: 15px;
+    }
+
+    .project-modal-info {
+        padding: 20px;
     }
 }
