@@ -105,13 +105,59 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background:
-        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.06) 0, transparent 45%),
-        radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.05) 0, transparent 40%),
-        linear-gradient(135deg, #0b1f3a 0%, #0f2f5c 45%, #007bff 100%);
+    background-color: #0b1f3a; /* fallback shown before the slider images load */
     color: #fff;
     position: relative;
+    overflow: hidden;
     padding-top: 60px; /* Offset for fixed header */
+}
+
+/* Sliding background: a looping strip of product renders, heavily
+   blurred and scaled up so the blur never reveals an edge, sitting
+   behind the gradient overlay below. */
+.hero-bg-slider {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    filter: blur(40px);
+    transform: scale(1.2); /* grows past the section's edges so blur has no hard boundary to reveal */
+}
+
+.hero-bg-track {
+    display: flex;
+    height: 100%;
+    width: max-content;
+    animation: hero-slide 90s linear infinite;
+}
+
+.hero-bg-track img {
+    height: 100%;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: cover;
+    display: block;
+}
+
+@keyframes hero-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); } /* the track is the image list duplicated once, so -50% is exactly one full loop */
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-bg-track {
+        animation: none;
+    }
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.08) 0, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.06) 0, transparent 40%),
+        linear-gradient(135deg, rgba(11, 31, 58, 0.88) 0%, rgba(15, 47, 92, 0.82) 45%, rgba(0, 123, 255, 0.75) 100%);
 }
 
 .hero-section .container {
