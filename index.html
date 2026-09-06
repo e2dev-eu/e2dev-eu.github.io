@@ -33,8 +33,18 @@
     <section id="hero" class="full-height hero-section">
         <div class="container">
             <h1 class="fade-in">E2Dev</h1>
-            <p class="fade-in delay-200">Your Partner in Embedded Electronics Development</p>
-            <a href="#contact" class="btn btn-primary fade-in delay-400">Innovate With Us</a>
+            <p class="hero-tagline fade-in delay-200">Your Partner in Embedded Electronics Development</p>
+            <p class="hero-subtext fade-in delay-300">From schematic to production-ready hardware: PCB design, firmware, and secure IoT systems — power electronics, battery management, connected controllers, and custom hardware tokens.</p>
+            <div class="hero-tags fade-in delay-400">
+                <span>PCB Design</span>
+                <span>Firmware Development</span>
+                <span>Power Electronics</span>
+                <span>IoT &amp; Connectivity</span>
+            </div>
+            <div class="hero-cta fade-in delay-500">
+                <a href="#contact" class="btn btn-primary">Innovate With Us</a>
+                <a href="#projects" class="btn btn-outline">See Our Work</a>
+            </div>
         </div>
     </section>
 
@@ -128,30 +138,66 @@
     <section id="projects" class="content-section">
         <div class="container">
             <h2 class="fade-in">Projects</h2>
-            <p class="fade-in delay-200">Explore our portfolio of innovative embedded projects.</p>
-            <div class="grid-layout two-col project-grid">
+            <p class="fade-in delay-200">A selection of custom hardware we've designed and built.</p>
+            <div class="grid-layout three-col project-grid">
                 <div class="project-item fade-in delay-300">
-                    <img src="https://placehold.co/600x400/e0e0e0/333?text=Project+Alpha" alt="Project Alpha">
+                    <img src="products/SignetLineDongle.png" alt="SignetLine hardware dongle, USB-C, on a PCB">
                     <div class="project-info">
-                        <h3>Project Alpha: AI Edge Processor</h3>
-                        <p>Developing a compact, low-power AI processor for edge computing applications.</p>
-                         <a href="#" class="btn btn-secondary">Learn More</a>
+                        <h3>SignetLine Dongle</h3>
+                        <p>A USB hardware token for secure messaging: performs ECDH key exchange and AES-GCM encryption on-device, so the private key never leaves the hardware.</p>
                     </div>
                 </div>
                 <div class="project-item fade-in delay-400">
-                    <img src="https://placehold.co/600x400/e0e0e0/333?text=Project+Beta" alt="Project Beta">
-                     <div class="project-info">
-                        <h3>Project Beta: Quantum Sensor Interface</h3>
-                        <p>Building an embedded interface for next-generation quantum sensors.</p>
-                         <a href="#" class="btn btn-secondary">Learn More</a>
+                    <img src="products/Custom scalable BMS with active balancing.png" alt="Custom scalable battery management system board">
+                    <div class="project-info">
+                        <h3>Scalable BMS with Active Balancing</h3>
+                        <p>A modular battery management system design with active cell balancing, built to scale across different pack configurations.</p>
                     </div>
                 </div>
-                 <div class="project-item fade-in delay-500">
-                    <img src="https://placehold.co/600x400/e0e0e0/333?text=Project+Gamma" alt="Project Gamma">
-                     <div class="project-info">
-                        <h3>Project Gamma: Decentralized Energy Monitor</h3>
-                        <p>Creating a secure, blockchain-enabled embedded system for energy monitoring.</p>
-                         <a href="#" class="btn btn-secondary">Learn More</a>
+                <div class="project-item fade-in delay-500">
+                    <img src="products/USB-C stackable powersupply.png" alt="USB-C stackable power supply board">
+                    <div class="project-info">
+                        <h3>USB-C Stackable Power Supply</h3>
+                        <p>A compact power supply module with USB-C input, designed to stack for building up modular power rails.</p>
+                    </div>
+                </div>
+                <div class="project-item fade-in delay-600">
+                    <img src="products/Custom solar inverter remote controller based on ESP32.png" alt="ESP32-based solar inverter remote controller board">
+                    <div class="project-info">
+                        <h3>ESP32 Solar Inverter Remote Controller</h3>
+                        <p>A custom ESP32-based remote controller for monitoring and controlling a solar inverter.</p>
+                    </div>
+                </div>
+                <div class="project-item fade-in delay-700">
+                    <div class="project-gallery">
+                        <img src="products/DC triac regulator - UI board - Front.png" alt="DC triac regulator UI board, front, with LCD and rotary encoder">
+                        <img src="products/DC triac regulator - UI board - back.png" alt="DC triac regulator UI board, rear side">
+                        <img src="products/DC triac regulator - Triac driver.png" alt="DC triac regulator, triac driver board">
+                    </div>
+                    <div class="project-info">
+                        <h3>DC Triac Regulator</h3>
+                        <p>A triac-based DC power regulator with a dedicated driver board and an LCD/rotary-encoder UI board for local control.</p>
+                    </div>
+                </div>
+                <div class="project-item fade-in delay-800">
+                    <img src="products/POE power supply.png" alt="Power-over-Ethernet power supply board">
+                    <div class="project-info">
+                        <h3>PoE Power Supply</h3>
+                        <p>A Power-over-Ethernet power supply board for powering remote embedded devices over a single Ethernet cable.</p>
+                    </div>
+                </div>
+                <div class="project-item fade-in delay-300">
+                    <img src="products/Custom serial protocol raspberry pi hat with RTC and SD card.png" alt="Raspberry Pi HAT with serial connector, RTC, and SD card slot">
+                    <div class="project-info">
+                        <h3>Raspberry Pi HAT — Serial, RTC &amp; SD Card</h3>
+                        <p>A custom Raspberry Pi HAT adding a serial interface, real-time clock, and SD card storage for embedded data-logging applications.</p>
+                    </div>
+                </div>
+                <div class="project-item fade-in delay-400">
+                    <img src="products/EVSE.png" alt="EVSE electric vehicle charging controller board">
+                    <div class="project-info">
+                        <h3>EVSE Controller</h3>
+                        <p>An electric vehicle charging station (EVSE) controller board handling charge control and communication.</p>
                     </div>
                 </div>
             </div>
@@ -186,18 +232,14 @@
         <div class="container">
             <h2 class="fade-in">Contact Us</h2>
             <p class="fade-in delay-200">Let's connect and discuss how E2Dev can power your next innovation.</p>
-            <div class="contact-info grid-layout three-col">
+            <div class="contact-info grid-layout two-col">
                 <div class="contact-item fade-in delay-300">
                     <i class="icon fas fa-envelope"></i>
-                    <p>Email: info@e2dev.com</p>
+                    <p>Email: <a href="mailto:shristov@e2dev.eu">shristov@e2dev.eu</a></p>
                 </div>
                 <div class="contact-item fade-in delay-400">
-                    <i class="icon fas fa-phone"></i>
-                    <p>Phone: +123 456 7890</p>
-                </div>
-                <div class="contact-item fade-in delay-500">
                     <i class="icon fas fa-map-marker-alt"></i>
-                    <p>Address: 123 Innovation Drive, Future City, FC 67890</p>
+                    <p>Sofia, Bulgaria</p>
                 </div>
             </div>
             </div>
